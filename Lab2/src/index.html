@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <span class="navbar-brand">Portfolio</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#menu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">О проекте</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Возможности</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>Пример сайта на Vite + Bootstrap</h1>
+    <p>Учебная работа с простым кастомным оформлением</p>
+
+    <div class="hero-buttons">
+      <a href="#features" class="btn btn-light">Перейти к блокам</a>
+      <button
+        class="btn btn-outline-light"
+        data-bs-toggle="modal"
+        data-bs-target="#infoModal"
+      >
+        Открыть модальное окно
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container text-center">
+    <h2>О проекте</h2>
+    <p>
+      Данный сайт был создан с использованием сборщика Vite,
+      фреймворка Bootstrap и препроцессора SCSS.
+    </p>
+  </div>
+</section>
+
+<section class="section bg-light" id="features">
+  <div class="container">
+    <h2 class="text-center mb-4">Примеры блоков</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <h5>Bootstrap</h5>
+          <p>Используется для сетки, кнопок, карточек и модального окна.</p>
+          <button class="btn btn-primary btn-sm">Подробнее</button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <h5>Vite</h5>
+          <p>Используется для быстрой сборки и запуска проекта.</p>
+          <button class="btn btn-success btn-sm">Сборка</button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <h5>SCSS</h5>
+          <p>Используется для изменения фона, отступов и оформления карточек.</p>
+          <button class="btn btn-dark btn-sm">Стили</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container text-center">
+    <h2 class="mb-4">Дополнительные элементы</h2>
+    <button class="btn btn-primary me-2">Основная кнопка</button>
+    <button class="btn btn-outline-secondary me-2">Вторичная</button>
+    <button
+      class="btn btn-warning"
+      data-bs-toggle="modal"
+      data-bs-target="#infoModal"
+    >
+      Показать модалку
+    </button>
+  </div>
+</section>
+
+<footer class="footer">
+  Учебный проект
+</footer>
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Информация</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        Это пример модального окна, созданного с помощью Bootstrap.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary">Понятно</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./js/main.js"></script>
+
+</body>
+</html>
