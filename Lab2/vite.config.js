@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 
 export default {
-  base : '/CompPractice/Lab2/',
+  base : '/CompPractice/',
   root: resolve(__dirname, 'src'),
   build: {
     outDir: '../dist'
