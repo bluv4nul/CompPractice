@@ -1,0 +1,14 @@
+{
+  "name": "Какой ты котик",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kitty.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.1.1"
+  }
+}
