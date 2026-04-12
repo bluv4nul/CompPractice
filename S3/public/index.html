@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>S3 Менеджер файлов</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    .actions button { margin: 0 5px; }
+    input[type="file"] { margin: 20px 0; }
+    img { max-width: 300px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>📁 Менеджер файлов S3</h1>
+
+  <h2>Загрузить файл</h2>
+  <input type="file" id="fileInput" />
+  <button onclick="uploadFile()">📤 Загрузить</button>
+
+  <h2>Файлы в бакете</h2>
+  <ul id="fileList">Загрузка...</ul>
+
+  <script>
+    async function refreshList() {
+      const res = await fetch('/files');
+      const files = await res.json();
+      const list = document.getElementById('fileList');
+      list.innerHTML = '';
+      files.forEach(file => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>${file.Key}</strong> (${new Date(file.LastModified).toLocaleString()})
+          <div class="actions">
+            <button onclick="viewFile('${file.Key}')">👁️ Посмотреть</button>
+            <button onclick="deleteFile('${file.Key}')">🗑️ Удалить</button>
+          </div>
+          <img id="img-${file.Key}" style="display:none;" />
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    async function uploadFile() {
+      const input = document.getElementById('fileInput');
+      const file = input.files[0];
+      if (!file) return alert("Выберите файл");
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (res.ok) {
+        alert('✅ Загружен');
+        input.value = '';
+        refreshList();
+      } else {
+        alert('❌ Ошибка');
+      }
+    }
+
+    async function viewFile(key) {
+      const res = await fetch(`/presign?key=${encodeURIComponent(key)}`);
+      const { url } = await res.json();
+      const img = document.getElementById(`img-${key}`);
+      img.src = url;
+      img.style.display = 'block';
+    }
+
+    async function deleteFile(key) {
+      if (!confirm(`Удалить ${key}?`)) return;
+      const res = await fetch(`/delete?key=${encodeURIComponent(key)}`, { method: 'DELETE' });
+      if (res.ok) {
+        alert('🗑️ Удалён');
+        refreshList();
+      } else {
+        alert('❌ Ошибка при удалении');
+      }
+    }
+
+    // Загружаем список при старте
+    refreshList();
+  </script>
+</body>
+</html>
