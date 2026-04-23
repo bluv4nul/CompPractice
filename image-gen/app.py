@@ -31,14 +31,11 @@ async def makeimage_post(
 ):
     try:
         if not image_width or not image_height:
-            width_int = 800
-            height_int = 510
+            width_int = 1024
+            height_int = 1024
         else:
             width_int = int(image_width)
             height_int = int(image_height)
-
-        if width_int < 1 or height_int < 1:
-            raise ValueError("Width and height must be at least 1")
 
         image = image_generator(prompt, width_int, height_int)
 
