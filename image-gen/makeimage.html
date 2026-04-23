@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeimage</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        input[type="text"],
+        textarea {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .dimensions-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .dimensions-row .form-group {
+            flex: 1;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Создание изображения</h1>
+        
+        <form action="/makeimage" method="post" target="frame" enctype="application/x-www-form-urlencoded">
+            <div class="dimensions-row">
+                <div class="form-group">
+                    <label for="width">Ширина (px):</label>
+                    <input type="text" id="width" name="image_width">
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Высота (px):</label>
+                    <input type="text" id="height" name="image_height">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Описание (Промпт):</label>
+                <textarea id="prompt" name="prompt" rows="4"></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Создать изображение</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Генерация изображения... Пожалуйста, подождите.</p>
+        </div>
+
+        <iframe src="" id="frame" name="frame"></iframe>
+    </div>
+    
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('submitBtn').disabled = true;
+            
+            document.getElementById('frame').onload = function() {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('submitBtn').disabled = false;
+            };
+        });
+    </script>
+</body>
+</html>
