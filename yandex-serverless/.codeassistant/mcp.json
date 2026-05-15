@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "yandex-cloud-toolkit": {
+      "type": "stdio",
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "set PATH=C:\\nvm4w\\nodejs;%PATH%&& C:\\nvm4w\\nodejs\\npx.cmd -y @yandex-cloud/mcp -s toolkit"
+      ]
+    },
+    "yandex-cloud-containers": {
+      "type": "stdio",
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "set PATH=C:\\nvm4w\\nodejs;%PATH%&& C:\\nvm4w\\nodejs\\npx.cmd -y @yandex-cloud/mcp -s containers"
+      ]
+    }
+  }
+}
